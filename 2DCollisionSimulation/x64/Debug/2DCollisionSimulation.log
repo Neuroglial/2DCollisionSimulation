@@ -1,0 +1,16 @@
+﻿  main.cpp
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(102,22): warning C4267: “初始化”: 从“size_t”转换到“uint32_t”，可能丢失数据
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(146,31): warning C4018: “<”: 有符号/无符号不匹配
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\main.cpp(13,65): warning C4244: “参数”: 从“const T”转换到“unsigned int”，可能丢失数据
+          with
+          [
+              T=float
+          ]
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\main.cpp(13,52): warning C4244: “参数”: 从“const T”转换到“unsigned int”，可能丢失数据
+          with
+          [
+              T=float
+          ]
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\main.cpp(44,33): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\main.cpp(47,23): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+  2DCollisionSimulation.vcxproj -> D:\Source\Project\2DCollisionSimulation\x64\Debug\2DCollisionSimulation.exe

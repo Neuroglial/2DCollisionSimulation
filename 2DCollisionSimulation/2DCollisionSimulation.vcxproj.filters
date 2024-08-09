@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="common">
+      <UniqueIdentifier>{926d61bb-e447-47e5-9823-88c5c2dbbde0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="physics">
+      <UniqueIdentifier>{d47dc453-5cd7-441e-b980-6fc440193c8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render">
+      <UniqueIdentifier>{4152f097-6535-4722-8944-1e54e3ab609b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="utils.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="math.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="physicObject.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="physics.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="collision.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="render.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
