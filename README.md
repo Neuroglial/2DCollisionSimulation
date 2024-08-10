@@ -10,3 +10,6 @@
 网格划分（1922个）提升522%：
 ![gif](https://github.com/Neuroglial/2DCollisionSimulation/blob/main/res/GridDivision.gif)
 
+四叉树（1158个）提升315%：
+![gif](https://github.com/Neuroglial/2DCollisionSimulation/blob/main/res/Quadtree.gif)
+
