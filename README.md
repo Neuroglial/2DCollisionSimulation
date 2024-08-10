@@ -1,5 +1,5 @@
 # 2DCollisionSimulation
-
+![gif](https://github.com/Neuroglial/2DCollisionSimulation/blob/main/res/MultiThread.gif)
 本项目为一个2D小球碰撞模拟器，创建该项目的初衷在于通过对该模拟器的不断迭代，学习和应用优化算法及并行计算技术。模拟器将展示多个小球在二维平面内的运动和碰撞过程，提供实时的物理仿真效果。
 
 初始暴力求解最多能够实时模拟368个小球，经过一系列优化最终超过260000个。
