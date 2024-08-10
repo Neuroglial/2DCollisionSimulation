@@ -13,6 +13,9 @@
     <Filter Include="Render">
       <UniqueIdentifier>{4152f097-6535-4722-8944-1e54e3ab609b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="threadPool">
+      <UniqueIdentifier>{3dbb8055-0bbc-41f6-9fef-588157fa046b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utils.h">
@@ -32,6 +35,9 @@
     </ClInclude>
     <ClInclude Include="render.h">
       <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="threadPool.h">
+      <Filter>threadPool</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

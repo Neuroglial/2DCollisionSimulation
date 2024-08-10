@@ -1,16 +1,68 @@
 ﻿  main.cpp
-D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(102,22): warning C4267: “初始化”: 从“size_t”转换到“uint32_t”，可能丢失数据
-D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(146,31): warning C4018: “<”: 有符号/无符号不匹配
-D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\main.cpp(13,65): warning C4244: “参数”: 从“const T”转换到“unsigned int”，可能丢失数据
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(100,21): warning C4244: “初始化”: 从“T”转换到“uint32_t”，可能丢失数据
           with
           [
               T=float
           ]
-D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\main.cpp(13,52): warning C4244: “参数”: 从“const T”转换到“unsigned int”，可能丢失数据
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(101,21): warning C4244: “初始化”: 从“T”转换到“uint32_t”，可能丢失数据
           with
           [
               T=float
           ]
-D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\main.cpp(44,33): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
-D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\main.cpp(47,23): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(102,21): warning C4244: “初始化”: 从“T”转换到“uint32_t”，可能丢失数据
+          with
+          [
+              T=float
+          ]
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(103,21): warning C4244: “初始化”: 从“T”转换到“uint32_t”，可能丢失数据
+          with
+          [
+              T=float
+          ]
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(134,131): warning C4244: “参数”: 从“T”转换到“uint32_t”，可能丢失数据
+          with
+          [
+              T=float
+          ]
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(134,108): warning C4244: “参数”: 从“T”转换到“uint32_t”，可能丢失数据
+          with
+          [
+              T=float
+          ]
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(188,31): warning C4018: “<”: 有符号/无符号不匹配
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(189,35): warning C4018: “<”: 有符号/无符号不匹配
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(198,31): warning C4018: “<”: 有符号/无符号不匹配
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(200,31): warning C4018: “<”: 有符号/无符号不匹配
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(201,35): warning C4018: “<”: 有符号/无符号不匹配
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(217,42): warning C4267: “参数”: 从“size_t”转换到“uint32_t”，可能丢失数据
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(231,35): warning C4018: “<”: 有符号/无符号不匹配
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(278,22): warning C4267: “初始化”: 从“size_t”转换到“uint32_t”，可能丢失数据
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(351,31): warning C4018: “<”: 有符号/无符号不匹配
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\main.cpp(14,65): warning C4244: “参数”: 从“const T”转换到“unsigned int”，可能丢失数据
+          with
+          [
+              T=float
+          ]
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\main.cpp(14,52): warning C4244: “参数”: 从“const T”转换到“unsigned int”，可能丢失数据
+          with
+          [
+              T=float
+          ]
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\main.cpp(47,33): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\main.cpp(50,34): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(48,27): warning C4018: “<”: 有符号/无符号不匹配
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(47,5): message : 在编译 类 模板 成员函数“MultiVector<uint32_t,6>::MultiVector(const MultiVector<uint32_t,6> &)”时
+D:\Software\Microsoft\VisualStudio2022\VC\Tools\MSVC\14.36.32532\include\xmemory(677,47): message : 请参阅 "std::_Default_allocator_traits<_Alloc>::construct" 中对 "MultiVector<uint32_t,6>::MultiVector" 的第一个引用
+          with
+          [
+              _Alloc=std::allocator<MultiVector<uint32_t,6>>
+          ]
+D:\Software\Microsoft\VisualStudio2022\VC\Tools\MSVC\14.36.32532\include\xmemory(1777,44): message : 请参阅 "std::_Uninitialized_backout_al<std::allocator<MultiVector<uint32_t,6>>>::_Emplace_back" 中对 "std::_Default_allocator_traits<_Alloc>::construct" 的第一个引用
+          with
+          [
+              _Alloc=std::allocator<MultiVector<uint32_t,6>>
+          ]
+D:\Software\Microsoft\VisualStudio2022\VC\Tools\MSVC\14.36.32532\include\xmemory(1831,31): message : 请参阅 "std::_Uninitialized_copy" 中对 "std::_Uninitialized_backout_al<std::allocator<MultiVector<uint32_t,6>>>::_Emplace_back" 的第一个引用
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(94,1): message : 查看对正在编译的 类 模板 实例化“MultiVector<uint32_t,6>”的引用
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(67): warning C4172: 返回局部变量或临时变量的地址
   2DCollisionSimulation.vcxproj -> D:\Source\Project\2DCollisionSimulation\x64\Debug\2DCollisionSimulation.exe

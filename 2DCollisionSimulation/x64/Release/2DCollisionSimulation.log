@@ -1,44 +1,69 @@
 ﻿  main.cpp
-D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(125,42): warning C4267: “参数”: 从“size_t”转换到“uint32_t”，可能丢失数据
-D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(153,22): warning C4267: “初始化”: 从“size_t”转换到“uint32_t”，可能丢失数据
-D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(197,31): warning C4018: “<”: 有符号/无符号不匹配
-D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\main.cpp(13,65): warning C4244: “参数”: 从“const T”转换到“unsigned int”，可能丢失数据
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(100,21): warning C4244: “初始化”: 从“T”转换到“uint32_t”，可能丢失数据
           with
           [
               T=float
           ]
-D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\main.cpp(13,52): warning C4244: “参数”: 从“const T”转换到“unsigned int”，可能丢失数据
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(101,21): warning C4244: “初始化”: 从“T”转换到“uint32_t”，可能丢失数据
           with
           [
               T=float
           ]
-D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\main.cpp(44,33): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
-D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\main.cpp(47,23): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
-D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(22,21): warning C4244: “初始化”: 从“T”转换到“uint32_t”，可能丢失数据
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(102,21): warning C4244: “初始化”: 从“T”转换到“uint32_t”，可能丢失数据
           with
           [
               T=float
           ]
-D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(20,10): message : 在编译 类 模板 成员函数“void Grid<48,48>::Insert(const Vec2 &,uint32_t,const Vec2 &,float)”时
-D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(103,24): message : 请参阅 "PhysicSolver::solveCollision" 中对 "Grid<48,48>::Insert" 的第一个引用
-D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(46,18): message : 查看对正在编译的 类 模板 实例化“Grid<48,48>”的引用
-D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(23,21): warning C4244: “初始化”: 从“T”转换到“uint32_t”，可能丢失数据
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(103,21): warning C4244: “初始化”: 从“T”转换到“uint32_t”，可能丢失数据
           with
           [
               T=float
           ]
-D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(24,21): warning C4244: “初始化”: 从“T”转换到“uint32_t”，可能丢失数据
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(135,131): warning C4244: “参数”: 从“T”转换到“uint32_t”，可能丢失数据
           with
           [
               T=float
           ]
-D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(25,21): warning C4244: “初始化”: 从“T”转换到“uint32_t”，可能丢失数据
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(135,108): warning C4244: “参数”: 从“T”转换到“uint32_t”，可能丢失数据
           with
           [
               T=float
           ]
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(189,31): warning C4018: “<”: 有符号/无符号不匹配
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(190,35): warning C4018: “<”: 有符号/无符号不匹配
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(199,31): warning C4018: “<”: 有符号/无符号不匹配
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(201,31): warning C4018: “<”: 有符号/无符号不匹配
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(202,35): warning C4018: “<”: 有符号/无符号不匹配
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(218,42): warning C4267: “参数”: 从“size_t”转换到“uint32_t”，可能丢失数据
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(232,35): warning C4018: “<”: 有符号/无符号不匹配
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(279,22): warning C4267: “初始化”: 从“size_t”转换到“uint32_t”，可能丢失数据
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(352,31): warning C4018: “<”: 有符号/无符号不匹配
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\main.cpp(14,65): warning C4244: “参数”: 从“const T”转换到“unsigned int”，可能丢失数据
+          with
+          [
+              T=float
+          ]
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\main.cpp(14,52): warning C4244: “参数”: 从“const T”转换到“unsigned int”，可能丢失数据
+          with
+          [
+              T=float
+          ]
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(48,27): warning C4018: “<”: 有符号/无符号不匹配
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(47,5): message : 在编译 类 模板 成员函数“MultiVector<uint32_t,10>::MultiVector(const MultiVector<uint32_t,10> &)”时
+D:\Software\Microsoft\VisualStudio2022\VC\Tools\MSVC\14.36.32532\include\xmemory(677,47): message : 请参阅 "std::_Default_allocator_traits<_Alloc>::construct" 中对 "MultiVector<uint32_t,10>::MultiVector" 的第一个引用
+          with
+          [
+              _Alloc=std::allocator<MultiVector<uint32_t,10>>
+          ]
+D:\Software\Microsoft\VisualStudio2022\VC\Tools\MSVC\14.36.32532\include\xmemory(1777,44): message : 请参阅 "std::_Uninitialized_backout_al<std::allocator<MultiVector<uint32_t,10>>>::_Emplace_back" 中对 "std::_Default_allocator_traits<_Alloc>::construct" 的第一个引用
+          with
+          [
+              _Alloc=std::allocator<MultiVector<uint32_t,10>>
+          ]
+D:\Software\Microsoft\VisualStudio2022\VC\Tools\MSVC\14.36.32532\include\xmemory(1831,31): message : 请参阅 "std::_Uninitialized_copy" 中对 "std::_Uninitialized_backout_al<std::allocator<MultiVector<uint32_t,10>>>::_Emplace_back" 的第一个引用
+D:\Source\Project\2DCollisionSimulation\2DCollisionSimulation\physics.h(94,1): message : 查看对正在编译的 类 模板 实例化“MultiVector<uint32_t,10>”的引用
   正在生成代码
-  1 of 257 functions ( 0.4%) were compiled, the rest were copied from previous compilation.
+  1 of 604 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   已完成代码的生成

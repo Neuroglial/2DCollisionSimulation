@@ -13,3 +13,5 @@
 四叉树（1158个）提升315%：
 ![gif](https://github.com/Neuroglial/2DCollisionSimulation/blob/main/res/Quadtree.gif)
 
+多线程和细节优化（超过240000个）提升超过65300%：
+![gif](https://github.com/Neuroglial/2DCollisionSimulation/blob/main/res/MultiThread.gif)

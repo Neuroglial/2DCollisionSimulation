@@ -27,6 +27,7 @@
     <ClInclude Include="physicObject.h" />
     <ClInclude Include="physics.h" />
     <ClInclude Include="render.h" />
+    <ClInclude Include="threadPool.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

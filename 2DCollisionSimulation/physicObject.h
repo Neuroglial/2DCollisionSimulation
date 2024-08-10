@@ -25,11 +25,9 @@ struct PhysicObject
         last_position = pos;
     }
 
-    void update(float dt)
+    void update(float dt,float friction)
     {
         const Vec2 last_update_move = position - last_position;
-
-        const float friction = 40.0f;
 
         const Vec2 new_position = position + last_update_move + (acceleration - last_update_move * friction) * (dt * dt * 0.5f);
 
