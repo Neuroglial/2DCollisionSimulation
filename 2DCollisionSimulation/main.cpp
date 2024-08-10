@@ -5,7 +5,7 @@
 #include <string>
 #include "threadPool.h"
 
-const float radius = 1.325f;
+const float radius = 1.3f;
 
 
 int main() {
@@ -18,7 +18,7 @@ int main() {
 
     PhysicSolver solver(worldSize, radius);
 
-    tp::ThreadPool threadPool(10);
+    tp::ThreadPool threadPool(15);
 
     Renderer render(solver, radius);
     solver.gravity.y = 500.f;
