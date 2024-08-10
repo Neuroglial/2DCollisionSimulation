@@ -22,9 +22,9 @@ int main() {
     solver.gravity.y = 500.f;
     Emiter emiter;
     emiter.Position = Vec2(25.f,25.f);
-    emiter.Speed.x = 100.f;
-    emiter.emitNum = 1;
-    emiter.intervel = 0.1f;
+    emiter.Speed.x = 180.f;
+    emiter.emitNum = 2;
+    emiter.intervel = 0.02f;
 
     double accum = 0.;
 

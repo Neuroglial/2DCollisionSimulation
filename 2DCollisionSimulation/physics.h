@@ -3,25 +3,62 @@
 #include "physicObject.h"
 #include "collision.h"
 #include "utils.h"
+#include <algorithm>
+
+template<int32_t SizeX,int32_t SizeY>
+struct Grid {
+    const int32_t size = SizeX*SizeY;
+
+    std::vector<uint32_t> Date[SizeX * SizeY];
+
+    void Clear() {
+        for (int i = 0; i < size; i++) {
+            Date[i].clear();
+        }
+    }
+
+    void Insert(const Vec2& position, uint32_t id,const Vec2& WorldSize,float radius) {
+        Vec2 size = Vec2(WorldSize.x / SizeX,WorldSize.y / SizeY);
+        uint32_t lx = (position.x - radius) / size.x;
+        uint32_t ly = (position.y - radius) / size.y;
+        uint32_t rx = (position.x + radius) / size.x;
+        uint32_t ry = (position.y + radius) / size.y;
+
+        Date[ly*SizeY + lx].push_back(id);
+
+        if (rx > lx) {
+            Date[rx + ly * SizeY].push_back(id);
+            if (ry > ly) {
+                Date[lx + ry * SizeY].push_back(id);
+                Date[rx + ry * SizeY].push_back(id);
+            }
+                
+        }else if (ry > ly)
+            Date[lx + ry * SizeY].push_back(id);
+    }
+};
 
 struct PhysicSolver
 {
     std::vector<PhysicObject> objects;
     Vec2 world_size;
     Vec2 gravity = { 0.0f, 20.0f };
+    Grid<48, 48> grid;
 
     // Simulation solving pass count
     uint32_t sub_steps;
+    float radius;
     float diameter;
     float diameter2;
 
     PhysicSolver(Vec2 size,float radius = 5.f)
         : world_size{ to<float>(size.x), to<float>(size.y) }
-        , sub_steps{ 4 }, diameter(radius*2), diameter2(radius* radius*4)
+        , sub_steps{ 4 }, radius(radius), diameter(radius*2), diameter2(radius* radius*4)
     {
     }
 
     void setRadius(float radius) {
+        this->radius = radius;
         diameter = radius * 2;
         diameter2 = radius * radius * 4;
     }
@@ -48,37 +85,51 @@ struct PhysicSolver
         }
     }
 
-    void checkAtomCellCollisions(uint32_t atom_idx, const CollisionCell& c)
+    void checkAtomCellCollisions(uint32_t atom_idx, const CollisionCell<16>& c)
     {
         for (uint32_t i{ 0 }; i < c.objects_count; ++i) {
             solveContact(atom_idx, c.objects[i]);
         }
     }
 
-    void processCell(const CollisionCell& c, uint32_t index)
+    void processCell(const CollisionCell<16>& c, uint32_t index)
     {
     }
 
-    void solveCollisionThreaded(uint32_t start, uint32_t end)
+    void solveCollision(uint32_t start, uint32_t end)
     {
+        grid.Clear();
+        for (int i = 0; i < objects.size();i++) {
+            grid.Insert(objects[i].position, i, world_size, radius);
+        }
 
+        for (int i = 0; i < grid.size; i++) {
+            auto& cell = grid.Date[i];
+            for (int m = 0; m < cell.size(); m++) {
+                for (int n = 0; n < cell.size(); n++) {
+                    solveContact(cell[m], cell[n]);
+                }
+            }
+        }
     }
 
     // Find colliding atoms
     void solveCollisions()
     {
-        for (uint32_t i = 0; i < objects.size(); i++) {
+        /*for (uint32_t i = 0; i < objects.size(); i++) {
             for (uint32_t j = i+1; j < objects.size(); j++) {
                 solveContact(i, j);
             }
-        }
+        }*/
+
+        solveCollision(0, objects.size() - 1);
     }
 
     // Add a new object to the solver
     uint64_t addObject(const PhysicObject& object)
     {
         objects.push_back(object);
-        return objects.size()-1;
+        return objects.size() - 1;
     }
 
     // Add a new object to the solver
@@ -140,7 +191,7 @@ struct Emiter {
         if (intervel < time) {
             time = 0.f;
 
-            float intv = solver.diameter + 0.1f;
+            float intv = solver.diameter*1.05f;
             auto pos = Position - Vec2(0, intv * emitNum / 2);
 
             for (int i = 0; i < emitNum; i++) {

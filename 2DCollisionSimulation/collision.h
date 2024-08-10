@@ -1,9 +1,10 @@
 #pragma once
 #include <cstdint>
 
+template<uint32_t maxNum>
 struct CollisionCell
 {
-    static constexpr uint8_t cell_capacity = 4;
+    static constexpr uint8_t cell_capacity = maxNum;
     static constexpr uint8_t max_cell_idx = cell_capacity - 1;
 
     uint32_t objects_count = 0;

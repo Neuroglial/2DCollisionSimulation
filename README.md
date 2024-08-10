@@ -6,3 +6,7 @@
 
 暴力求解（368个）：
 ![gif]([https://github.com/Neuroglial/Jasmine3D/blob/OpenGLAssignment/Resources/Jasmine%20Engine%20Transform.gif](https://github.com/Neuroglial/2DCollisionSimulation/blob/main/res/Violent%20solution.gif))
+
+网格划分（1922个）提升522%：
+![gif]([https://github.com/Neuroglial/Jasmine3D/blob/OpenGLAssignment/Resources/Jasmine%20Engine%20Transform.gif](https://github.com/Neuroglial/2DCollisionSimulation/blob/main/res/GridDivision.gif))
+
