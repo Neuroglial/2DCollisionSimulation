@@ -10,6 +10,10 @@ struct Math
     static constexpr float PI = 3.141592653f;
     static constexpr float TwoPI = 2.0f * PI;
 
+    static float length(float x,float y) {
+        return sqrt(x * x + y * y);
+    }
+
     static float pow(float v, const uint32_t p)
     {
         float res = 1;

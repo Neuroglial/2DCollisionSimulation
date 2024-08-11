@@ -129,6 +129,7 @@ struct PhysicSolver
     float diameter;
     float diameter2;
     float friction = 50.;
+    float response_coef = 0.1f;
 
     PhysicSolver(Vec2 size,float radius = 5.f)
         : world_size{ to<float>(size.x), to<float>(size.y) }
@@ -149,7 +150,6 @@ struct PhysicSolver
     // Checks if two atoms are colliding and if so create a new contact
     void solveContact(uint32_t atom_1_idx, uint32_t atom_2_idx)
     {
-        constexpr float response_coef = 1.0f;
         constexpr float eps = 0.0001f;
         PhysicObject& obj_1 = objects[atom_1_idx];
         PhysicObject& obj_2 = objects[atom_2_idx];
@@ -336,14 +336,16 @@ struct Emiter {
     Vec2 Speed = { 10.f,0.f };
     Vec2 Position = { 10.f,10.f };
     float time = 0.f;
-    float intervel = 0.25f;
+    float intervel = 1.1f;
     uint32_t emitNum = 1;
 
 
     void Emit(PhysicSolver& solver,float dt) {
         time += dt;
 
-        if (intervel < time) {
+        
+
+        if (time*Math::length(Speed.x,Speed.y)>intervel*solver.diameter) {
             time = 0.f;
 
             float intv = solver.diameter*1.01f;
@@ -353,7 +355,7 @@ struct Emiter {
                 auto id = solver.createObject(Position + Vec2(0, intv * i));
                 auto& obj = solver.objects[id];
                 obj.last_position -= Speed * dt;
-                obj.color = ColorUtils::getRainbow(id * 0.000005f);
+                obj.color = ColorUtils::getRainbow(id * 0.00001f);
             }
         }
     }

@@ -5,11 +5,11 @@
 #include <string>
 #include "threadPool.h"
 
-const float radius = 1.3f;
+const float radius = 2.f;
 
 
 int main() {
-    const Vec2 worldSize{ 1200,1200 };
+    const Vec2 worldSize{ 1400,1400 };
     // 创建一个窗口
     sf::RenderWindow window(sf::VideoMode(worldSize.x, worldSize.y), "Batch Render Colored Quads");
 
@@ -21,25 +21,26 @@ int main() {
     tp::ThreadPool threadPool(15);
 
     Renderer render(solver, radius);
-    solver.gravity.y = 500.f;
-    solver.friction = 80.f;
+    solver.gravity.y = 40.f;
+    solver.friction = 40.f;
     solver.sub_steps = 1;
+
+    float speed = 160;
+    int num = 25;
 
     Emiter emiter;
     emiter.Position = Vec2(25.f,25.f);
-    emiter.Speed.x = 400.;
-    emiter.emitNum = 50;
-    emiter.intervel = 0.0075f;
+    emiter.Speed.x = speed;
+    emiter.emitNum = num;
 
     Emiter emiter1;
     emiter1.Position = Vec2(worldSize.x - 25.5f, 25.f);
-    emiter1.Speed.x = -400.;
-    emiter1.emitNum = 50;
-    emiter1.intervel = 0.0075f;
+    emiter1.Speed.x = -speed;
+    emiter1.emitNum = num;
 
     double accum = 0.;
 
-    float dt = 1 / 1000.f;
+    float dt = 1 / 280.0f;
 
     // 主循环
     while (window.isOpen()) {
