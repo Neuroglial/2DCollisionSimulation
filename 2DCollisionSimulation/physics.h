@@ -6,85 +6,16 @@
 #include <algorithm>
 #include "threadPool.h"
 
-//template<typename T>
-//class MultiVector{
-//    std::vector<T> Date;
-//    std::mutex Write;
-//public:
-//
-//    inline void push_back(T& value){
-//        //std::lock_guard<std::mutex> lock(Write);
-//        Date.push_back(value);
-//    }
-//
-//    inline void Set(T& value, uint32_t i){
-//        //std::lock_guard<std::mutex> lock(Write);
-//        Date[i] = value;
-//    }
-//
-//    inline const T& operator[] (int i) {
-//        return Date[i];
-//    }
-//
-//    inline int size() {
-//        return Date.size();
-//    }
-//
-//    inline void clear() {
-//        Date.clear();
-//    }
-//};
-
-template<typename T,uint32_t max>
-class MultiVector{
-    std::mutex Write;
-    T Date[max];
-    uint32_t num = 0;
-public:
-
-    MultiVector() = default;
-
-    MultiVector(const MultiVector<T, max>& a) {
-        for (int i = 0; i < a.size();i++)
-            Date[i] = a[i];
-    }
-
-    inline void push_back(T& value){
-        std::lock_guard<std::mutex> lock(Write);
-        if (num >= max)
-            return;
-        Date[num] = value;
-        num += num < max;
-    }
-
-    inline void Set(T& value, uint32_t i){
-        std::lock_guard<std::mutex> lock(Write);
-        Date[i] = value;
-    }
-
-    inline const T& operator[] (int i) const {
-        if (i >= max)
-            return 0;
-        return Date[i];
-    }
-
-    inline uint32_t size() const {
-        return num;
-    }
-
-    inline void clear() {
-        num = 0;
-    }
-};
+using cell = CollisionCell<5>;
 
 struct Grid {
-    const int32_t size;
-    const int32_t sizeX;
-    const int32_t sizeY;
+    const unsigned int size;
+    const unsigned int sizeX;
+    const unsigned int sizeY;
 
-    std::vector<MultiVector<uint32_t, 10>> Date;
+    std::vector<cell> Date;
 
-    Grid(uint32_t sizeX,uint32_t sizeY)
+    Grid(unsigned int sizeX,unsigned int sizeY)
     :size(sizeX*sizeY),sizeX(sizeX),sizeY(sizeY){
         Date.resize(size);
     }
@@ -95,24 +26,15 @@ struct Grid {
         }
     }
 
-    void Insert(const Vec2& position, uint32_t id,const Vec2& WorldSize,float radius) {
-        Vec2 size = Vec2(WorldSize.x / sizeX,WorldSize.y / sizeY);
-        uint32_t lx = (position.x - radius) / size.x;
-        uint32_t ly = (position.y - radius) / size.y;
-        uint32_t rx = (position.x + radius) / size.x;
-        uint32_t ry = (position.y + radius) / size.y;
+    void Insert(const Vec2& position, unsigned int id,const Vec2& WorldSize,float radius) {
+        unsigned int x = position.x * sizeX / WorldSize.x;
+        unsigned int y = position.y * sizeY / WorldSize.y;
 
-        Date[ly*sizeY + lx].push_back(id);
+        Date[x + y * sizeX].push_back(id);
+    }
 
-        if (rx > lx) {
-            Date[rx + ly * sizeY].push_back(id);
-            if (ry > ly) {
-                Date[lx + ry * sizeY].push_back(id);
-                Date[rx + ry * sizeY].push_back(id);
-            }
-                
-        }else if (ry > ly)
-            Date[lx + ry * sizeY].push_back(id);
+    inline cell& Get(unsigned int x,unsigned int y) {
+        return Date[x + y * sizeX];
     }
 };
 
@@ -124,7 +46,7 @@ struct PhysicSolver
     Grid grid;
 
     // Simulation solving pass count
-    uint32_t sub_steps;
+    unsigned int sub_steps;
     float radius;
     float diameter;
     float diameter2;
@@ -148,7 +70,7 @@ struct PhysicSolver
     }
 
     // Checks if two atoms are colliding and if so create a new contact
-    void solveContact(uint32_t atom_1_idx, uint32_t atom_2_idx)
+    void solveContact(unsigned int atom_1_idx, unsigned int atom_2_idx)
     {
         constexpr float eps = 0.0001f;
         PhysicObject& obj_1 = objects[atom_1_idx];
@@ -164,82 +86,56 @@ struct PhysicSolver
         }
     }
 
-    void checkAtomCellCollisions(uint32_t atom_idx, const CollisionCell<16>& c)
+    void checkCellCollisions(const cell& a, const cell& b)
     {
-        for (uint32_t i{ 0 }; i < c.objects_count; ++i) {
-            solveContact(atom_idx, c.objects[i]);
-        }
-    }
-
-    void processCell(const CollisionCell<16>& c, uint32_t index)
-    {
-    }
-
-    void solveCollision(uint32_t start, uint32_t end)
-    {
-        grid.Clear();
-
-
-        for (int i = 0; i < objects.size();i++) {
-            grid.Insert(objects[i].position, i, world_size, radius);
-        }
-
-        for (int i = 0; i < grid.size; i++) {
-            auto& cell = grid.Date[i];
-            for (int m = 0; m < cell.size(); m++) {
-                for (int n = 0; n < cell.size(); n++) {
-                    solveContact(cell[m], cell[n]);
-                }
+        for (int i = 0; i < a.objects_count; ++i) {
+            for (int j = 0; j < b.objects_count; ++j) {
+                solveContact(a.objects[i], b.objects[j]);
             }
         }
     }
 
-    void solveCollisionMulti(uint32_t start, uint32_t end)
+    void solveCollision(unsigned int start, unsigned int end)
     {
-        for (int i = start; i < end; i++) {
-            auto& cell = grid.Date[i];
-            for (int m = 0; m < cell.size(); m++) {
-                for (int n = 0; n < cell.size(); n++) {
-                    solveContact(cell[m], cell[n]);
-                }
+        for (int i = start; i < end; ++i) {
+            auto& the = grid.Date[i];
+            checkCellCollisions(the, the);
+
+            if (i % grid.sizeX) {
+                checkCellCollisions(the, grid.Date[i - 1]);
+                if (i + grid.sizeX - 1 < grid.size)
+                    checkCellCollisions(the, grid.Date[i + grid.sizeX - 1]);
+            }
+
+            if ((i + 1) % grid.sizeX && i+1<grid.size) {
+                checkCellCollisions(the, grid.Date[i + 1]);
+                if (i + grid.sizeX + 1 < grid.size)
+                    checkCellCollisions(the, grid.Date[i + grid.sizeX + 1]);
+            }
+
+            if (i + grid.sizeX < grid.size) {
+                checkCellCollisions(the, grid.Date[i + grid.sizeX]);
             }
         }
     }
 
-    // Find colliding atoms
-    void solveCollisions()
+    void solveCollisions_Multi(tp::ThreadPool& tp)
     {
-        /*for (uint32_t i = 0; i < objects.size(); i++) {
-            for (uint32_t j = i+1; j < objects.size(); j++) {
-                solveContact(i, j);
-            }
-        }*/
+        for (int i = 0; i < grid.sizeY; i += 2) {
+            tp.addTask([i,this] {
+                solveCollision(i * grid.sizeX, i * grid.sizeX + grid.sizeX);
+                });
+        }
 
-        solveCollision(0, objects.size() - 1);
-    }
-
-    void solveCollisionsMulti(tp::ThreadPool& tp)
-    {
-        /*for (uint32_t i = 0; i < objects.size(); i++) {
-            for (uint32_t j = i+1; j < objects.size(); j++) {
-                solveContact(i, j);
-            }
-        }*/
-
-        grid.Clear();
-
-        tp.dispatch(to<uint32_t>(objects.size()), [this](uint32_t start, uint32_t end) {
-            for (int i = start; i < end; i++) {
-                grid.Insert(objects[i].position, i, world_size, radius);
-            }
-         });
 
         tp.waitForCompletion();
 
-        tp.dispatch(to<uint32_t>(grid.size), [this](uint32_t start, uint32_t end) {
-                solveCollisionMulti(start, end);
-        });
-        
+        for (int i = 1; i < grid.sizeY; i += 2) {
+            tp.addTask([i, this] {
+                solveCollision(i * grid.sizeX, i * grid.sizeX + grid.sizeX);
+                });
+        }
+
     }
 
     // Add a new object to the solver
@@ -256,56 +152,30 @@ struct PhysicSolver
         return objects.size() - 1;
     }
 
-    void update(float dt)
+    void addObjectsToGrid_Multi(tp::ThreadPool& tp) {
+        grid.Clear();
+
+        tp.dispatch(objects.size(), [this](uint32_t start, uint32_t end) {
+            for (int i = start; i < end; i++) {
+                grid.Insert(objects[i].position, i, world_size, radius);
+            }
+            });
+    }
+
+    void update(float dt,tp::ThreadPool& tp)
     {
         const float sub_dt = dt / to<float>(sub_steps);
-        for (uint32_t i(sub_steps); i--;) {
-            solveCollisions();
-            updateObjects(sub_dt);
+        for (unsigned int i(sub_steps); i--;) {
+            addObjectsToGrid_Multi(tp);
+            solveCollisions_Multi(tp);
+            updateObjects_Multi(sub_dt,tp);
         }
     }
 
-    void updateMultiThread(float dt,tp::ThreadPool& tp)
+    void updateObjects_Multi(float dt,tp::ThreadPool& tp)
     {
-        const float sub_dt = dt / to<float>(sub_steps);
-        for (uint32_t i(sub_steps); i--;) {
-            solveCollisionsMulti(tp);
-            updateObjectsMultiThread(sub_dt,tp);
-        }
-    }
-
-    void updateObjects(float dt)
-    {
-        uint32_t end = objects.size();
-
-        for (uint32_t i=0; i < end; ++i) {
-            PhysicObject& obj = objects[i];
-            // Add gravity
-            obj.acceleration += gravity;
-            // Apply Verlet integration
-            obj.update(dt,friction);
-            // Apply map borders collisions
-            const float margin = diameter;
-            if (obj.position.x > world_size.x - margin) {
-                obj.position.x = world_size.x - margin;
-            }
-            else if (obj.position.x < margin) {
-                obj.position.x = margin;
-            }
-            if (obj.position.y > world_size.y - margin) {
-                obj.position.y = world_size.y - margin;
-            }
-            else if (obj.position.y < margin) {
-                obj.position.y = margin;
-            }
-        }
-
-    }
-
-    void updateObjectsMultiThread(float dt,tp::ThreadPool& tp)
-    {
-        tp.dispatch(to<uint32_t>(objects.size()), [this,dt](uint32_t start, uint32_t end) {
-            for (uint32_t i = start; i < end; ++i) {
+        tp.dispatch(to<unsigned int>(objects.size()), [this,dt](unsigned int start, unsigned int end) {
+            for (unsigned int i = start; i < end; ++i) {
 
                 PhysicObject& obj = objects[i];
                 // Add gravity
@@ -337,7 +207,7 @@ struct Emiter {
     Vec2 Position = { 10.f,10.f };
     float time = 0.f;
     float intervel = 1.1f;
-    uint32_t emitNum = 1;
+    unsigned int emitNum = 1;
 
 
     void Emit(PhysicSolver& solver,float dt) {

@@ -3,6 +3,7 @@
 #include "math.h"
 
 using Vec2 = sf::Vector2f;
+using Vec2u = sf::Vector2u;
 
 template<typename U,typename T>
 U to(const T& v) {
